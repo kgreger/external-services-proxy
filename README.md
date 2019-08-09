@@ -1,2 +1,2 @@
 # External Services Proxy for Tableau
-This repository contains all the code and files required to setup an External Services Proxy for the use of multiple external services in Tableau. More details in the accompanying blog post at https://konstantingreger.net/why-decide--using-both-r-and-python-in-tableau---at-the-same-time/
+This repository contains all the code and files required to setup an External Services Proxy for the use of multiple external services in Tableau. More details in the accompanying blog post at https://konstantingreger.net/why-decide--using-both-r-and-python-in-tableau---at-the-same-time/ and a video showing the whole process is available at https://www.youtube.com/watch?v=kUnw7JSKSwQ.

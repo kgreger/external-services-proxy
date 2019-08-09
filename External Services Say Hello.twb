@@ -17,6 +17,13 @@
         <calculation class='tableau' formula='200' />
         <range granularity='50' max='200' min='50' />
       </column>
+      <column caption='External Service' datatype='string' name='[Parameter 3]' param-domain-type='list' role='measure' type='nominal' value='&quot;R&quot;'>
+        <calculation class='tableau' formula='&quot;R&quot;' />
+        <members>
+          <member value='&quot;R&quot;' />
+          <member value='&quot;PYTHON&quot;' />
+        </members>
+      </column>
     </datasource>
     <datasource inline='true' name='Sample - Superstore' version='10.2'>
       <connection class='federated'>
@@ -379,7 +386,7 @@
       </connection>
       <aliases enabled='yes' />
       <column caption='External Scripts' datatype='string' name='[Calculation_272186358755078144]' role='measure' type='nominal'>
-        <calculation class='tableau' formula='SCRIPT_STR(&quot;&#13;&#10;return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;R&apos;)[&apos;response&apos;]&#13;&#10;&quot;, &#13;&#10;MAX([Region]))'>
+        <calculation class='tableau' formula='SCRIPT_STR(&quot;&#13;&#10;return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;R&apos;)[&apos;response&apos;]&#13;&#10;&quot;, &#13;&#10;MAX([Region]))&#13;&#10;&#13;&#10;// alternatively evaluate the parameter:&#13;&#10;// return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;&quot; + [External Service] + &quot;&apos;)[&apos;response&apos;]'>
           <table-calc ordering-type='Rows' />
         </calculation>
       </column>
@@ -2658,7 +2665,7 @@
         <folder-item name='[Ship Date]' type='field' />
         <folder-item name='[Ship Mode]' type='field' />
       </folder>
-      <layout dim-ordering='alphabetic' dim-percentage='0.610123' group-percentage='0.0355677' measure-ordering='alphabetic' measure-percentage='0.29275' parameter-percentage='0.0615595' show-structure='false' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.555817' group-percentage='0.0634548' measure-ordering='alphabetic' measure-percentage='0.283196' parameter-percentage='0.0975323' show-structure='false' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
@@ -2691,14 +2698,14 @@
           </datasources>
           <datasource-dependencies datasource='Sample - Superstore'>
             <column caption='External Scripts' datatype='string' name='[Calculation_272186358755078144]' role='measure' type='nominal'>
-              <calculation class='tableau' formula='SCRIPT_STR(&quot;&#13;&#10;return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;R&apos;)[&apos;response&apos;]&#13;&#10;&quot;, &#13;&#10;MAX([Region]))'>
+              <calculation class='tableau' formula='SCRIPT_STR(&quot;&#13;&#10;return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;R&apos;)[&apos;response&apos;]&#13;&#10;&quot;, &#13;&#10;MAX([Region]))&#13;&#10;&#13;&#10;// alternatively evaluate the parameter:&#13;&#10;// return tabpy.query(&apos;external_services_say_hello&apos;, _arg1, &apos;&quot; + [External Service] + &quot;&apos;)[&apos;response&apos;]'>
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
             <column datatype='string' name='[Region]' role='dimension' type='nominal' />
             <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Calculation_272186358755078144]' derivation='User' name='[usr:Calculation_272186358755078144:nk]' pivot='key' type='nominal'>
-              <table-calc ordering-type='Rows' />
+            <column-instance column='[Calculation_272186358755078144]' derivation='User' name='[usr:Calculation_272186358755078144:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-type='CellInPane' />
             </column-instance>
           </datasource-dependencies>
           <aggregation value='true' />
@@ -2718,7 +2725,7 @@
             </style>
           </pane>
         </panes>
-        <rows>([Sample - Superstore].[none:Region:nk] / [Sample - Superstore].[usr:Calculation_272186358755078144:nk])</rows>
+        <rows>([Sample - Superstore].[none:Region:nk] / [Sample - Superstore].[usr:Calculation_272186358755078144:nk:1])</rows>
         <cols />
       </table>
     </worksheet>
@@ -2731,6 +2738,7 @@
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
+            <card mode='compact' param='[Parameters].[Parameter 3]' type='parameter' />
           </strip>
         </edge>
         <edge name='top'>
@@ -2750,6 +2758,7 @@
           <color-one-way>
             <field>[Sample - Superstore].[none:Country:nk]</field>
             <field>[Sample - Superstore].[none:Region:nk]</field>
+            <field>[Sample - Superstore].[usr:Calculation_272186358755078144:nk:2]</field>
             <field>[Sample - Superstore].[usr:Calculation_272186358755078144:nk]</field>
           </color-one-way>
         </highlight>
